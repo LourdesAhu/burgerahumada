@@ -11,7 +11,7 @@ class Pedido extends Model
     public $timestames = false;
 
     protected $fillable = [
-        'idpedidos','fecha', 'descripcion', 'total', 'fk_idsucursal', 'fk_idcliente', 'fk_idestado',
+        'idpedido','fecha', 'descripcion', 'total', 'fk_idsucursal', 'fk_idcliente', 'fk_idestado',
     ];
     protected $hidden = [
 
@@ -36,7 +36,7 @@ class Pedido extends Model
             $this->fk_idcliente,
             $this->fk_idestado
         ]);
-        return $this->idpedidos = DB::getPdo()->lastInsertId();
+        return $this->idpedido = DB::getPdo()->lastInsertId();
     }
 
 
@@ -49,7 +49,7 @@ class Pedido extends Model
             fk_idsucursal= '$this->fk_idsucursal',
             fk_idcliente= '$this->fk_idcliente',
             fk_idestado= '$this->fk_idestado',
-            WHERE idpedidos=?";
+            WHERE idpedido=?";
         $affected = DB::update($sql, [
             $this->fecha,
             $this->descripcion,
@@ -57,22 +57,22 @@ class Pedido extends Model
             $this->fk_idsucursal,
             $this->fk_idcliente,
             $this->fk_idestado,
-            $this->idpedidos]);
+            $this->idpedido]);
     }
 
 
     public function eliminar()
     {
         $sql = "DELETE FROM pedidos WHERE 
-        idpedidos=?";
-        $affected = DB::delete($sql, [$this->idpedidos]);
+        idpedido=?";
+        $affected = DB::delete($sql, [$this->idpedido]);
     }
 
 
     public function obtenerTodos()
     {
         $sql = "SELECT
-                idpedidos
+                idpedido
                 fecha,
                 descripcion,
                 total,
@@ -85,21 +85,21 @@ class Pedido extends Model
     }
 
 
-    public function obtenerPorId($idpedidos)
+    public function obtenerPorId($idpedido)
     {
         $sql = "SELECT
-            idpedidos
+            idpedido
             fecha,
             descripcion,
             total,
             fk_idsucursal,
             fk_idcliente,
             fk_idestado 
-            FROM pedidos WHERE idpedidos = $idpedidos";
+            FROM pedidos WHERE idpedido = $idpedido";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno) > 0) {
-            $this->idpedidos = $lstRetorno[0]->idpedidos;
+            $this->idpedido = $lstRetorno[0]->idpedido;
             $this->fecha = $lstRetorno[0]->fecha;
             $this->descripcion = $lstRetorno[0]->descripcion;
             $this->total = $lstRetorno[0]->total;
