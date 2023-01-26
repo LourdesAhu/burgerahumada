@@ -15,7 +15,4 @@ class ControladorCliente extends Controller
         return view ("sistema.cliente-listar", compact("titulo"));
     }
 }
-
-
-
 ?>
